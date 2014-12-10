@@ -1,0 +1,12 @@
+[Unit]
+Description=AptChacherNG container
+Author=David Schmitz
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a uport/apt-cacher-ng
+ExecStop=/usr/bin/docker stop -t 2 uport/apt-cacher-ng
+
+[Install]
+WantedBy=local.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Tomcat container
+Author=David Schmitz
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a uport/tomcat
+ExecStop=/usr/bin/docker stop -t 2 uport/tomcat
+
+[Install]
+WantedBy=local.target

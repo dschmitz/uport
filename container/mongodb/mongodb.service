@@ -1,0 +1,17 @@
+[Unit]
+Description=Mongo is a scalable, document-oriented database.
+After=syslog.target network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/mongod $OPTIONS run
+User=mongod
+Group=mongod
+EnvironmentFile=/etc/sysconfig/mongod
+# comment out if dbpath and/or pidfilepath (/etc/mongod.conf)
+# are set in /var/*/* (by default)
+#NoNewPrivileges=yes
+#PIDFile=/var/run/mongod.pid
+
+[Install]
+WantedBy=multi-user.target

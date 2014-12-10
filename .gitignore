@@ -1,0 +1,14 @@
+.project
+.vagrant
+packer_cache
+syntax: glob
+*.vmdk
+*.ovf
+*.vdi
+*.iso
+*.box
+*.part
+*.zsync
+*.zs-old
+*.log
+
