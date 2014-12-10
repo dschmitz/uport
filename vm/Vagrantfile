@@ -1,0 +1,27 @@
+Vagrant.configure("2") do |config|
+
+$script = <<SCRIPT
+#######################################################
+# Add commands for startup here                       #
+#######################################################
+  date > /etc/vagrant_provisioned_at
+
+SCRIPT
+
+  config.vm.provision :shell, :inline => $script
+
+  # Any folder of registered vagrant box will create a config entry
+  definitions = Dir["#{Dir.home}/.vagrant.d/boxes/*/"].map { |name| File.basename(name) }
+  definitions.each do |box|
+ 
+    config.vm.define box do |boxconfig|
+      boxconfig.vm.box = "#{box}"
+      boxconfig.vm.provider :virtualbox  do |vbox|
+        vbox.gui = true
+
+		# Override startup options with gentle values
+        vbox.customize ["modifyvm", :id, "--cpuexecutioncap", "25", "--memory", 2048]
+      end
+    end
+  end
+end

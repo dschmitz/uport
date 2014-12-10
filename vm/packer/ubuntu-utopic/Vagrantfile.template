@@ -1,0 +1,11 @@
+Vagrant.configure("2") do |config|
+
+$script = <<SCRIPT
+#######################################################
+# Add commands for startup here                       #
+#######################################################
+  date > /etc/vagrant_provisioned_at
+SCRIPT
+
+  config.vm.provision :shell, :inline => $script
+end
